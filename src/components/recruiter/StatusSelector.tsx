@@ -2,7 +2,16 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ApplicationStatus } from "@prisma/client";
+const ApplicationStatus = {
+  APPLIED: "APPLIED",
+  UNDER_REVIEW: "UNDER_REVIEW",
+  SHORTLISTED: "SHORTLISTED",
+  INTERVIEW: "INTERVIEW",
+  SELECTED: "SELECTED",
+  REJECTED: "REJECTED"
+} as const;
+
+type ApplicationStatus = keyof typeof ApplicationStatus;
 
 export default function StatusSelector({ 
   applicationId, 

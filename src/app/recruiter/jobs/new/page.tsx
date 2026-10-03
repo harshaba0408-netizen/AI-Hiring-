@@ -3,7 +3,22 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { JobType, EducationLevel } from "@prisma/client";
+const JobType = {
+  FULL_TIME: "FULL_TIME",
+  PART_TIME: "PART_TIME",
+  CONTRACT: "CONTRACT",
+  INTERNSHIP: "INTERNSHIP",
+  FREELANCE: "FREELANCE"
+} as const;
+
+const EducationLevel = {
+  HIGH_SCHOOL: "HIGH_SCHOOL",
+  ASSOCIATE: "ASSOCIATE",
+  BACHELOR: "BACHELOR",
+  MASTER: "MASTER",
+  PHD: "PHD",
+  OTHER: "OTHER"
+} as const;
 
 export default function NewJobPage() {
   const router = useRouter();
