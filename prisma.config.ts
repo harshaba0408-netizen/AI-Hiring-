@@ -2,9 +2,17 @@ import { defineConfig } from "@prisma/config";
 import fs from "fs";
 import path from "path";
 
-const envStr = fs.readFileSync(path.join(process.cwd(), ".env"), "utf8");
-const dbUrlMatch = envStr.match(/DATABASE_URL_UNPOOLED="?([^"\n]+)"?/);
-const dbUrl = dbUrlMatch ? dbUrlMatch[1] : undefined;
+let dbUrl;
+try {
+  const envPath = path.join(process.cwd(), ".env");
+  if (fs.existsSync(envPath)) {
+    const envStr = fs.readFileSync(envPath, "utf8");
+    const dbUrlMatch = envStr.match(/DATABASE_URL_UNPOOLED="?([^"\n]+)"?/);
+    dbUrl = dbUrlMatch ? dbUrlMatch[1] : undefined;
+  }
+} catch (e) {
+  // Ignore
+}
 
 export default defineConfig({
   datasource: {
